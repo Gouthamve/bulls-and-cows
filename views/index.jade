@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  .mainContainer
+    .options
+      img(src="/images/bullscows.png")
+      br
+      button(class="humanGameButton", onclick="onHumanGameButtonClick()") Human Game
+      button(class="aiGameButton", onclick="onAIGameButtonClick()") AI Game
+    .gameContainer
+      .gamePanel
+        .initialPanel
+          h2 Bulls and Cows
+          p(class="rules") 
+            | Bulls and Cows Game is a game also known as MasterMind.
+            | Computer selects a four digit number with all four digits being different. 
+            | In the current implementation number may not begin with 0. 
+            | "Cow" column displays total number of digits you guessed right, 
+            | "Bull" shows how many of those that exists were placed at the right spots. 
+            | You are given 10 guesses per game to try and find the secret number. 
+            | Take your time and try to make most of them.
+        .humanGamePanel
+          form(onsubmit="return false")
+            input(class="humanGuessInput", type="text")
+            input(type="submit", value="Make Guess" class="humanGuessButton", onclick="onHumanGuessButtonClick.call(this)")
+        .aiGamePanel
+          | AI GAME
+      .guessesPanel

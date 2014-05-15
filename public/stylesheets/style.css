@@ -1,0 +1,74 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.mainContainer {
+  width: 580px;
+  height: 375px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.options {
+  background: none repeat scroll 0 0 #9BD1FA;
+  width: 240px;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  
+}
+
+.gameContainer {
+  width: 310px;
+  height: 100%;
+  display: inline-block;
+  border: 2px dotted;
+  margin-left: 20px;
+  padding: 3px;
+}
+
+.guessesPanel {
+  height: 100%;
+  width: 100%;
+  border-width: 7px 0 0;
+  display: none;
+  margin-left: 0;
+  margin-top: 10px;
+  border-style: double;
+}
+
+.initialPanel .rules {
+  width: 83%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gamePanel {
+  margin-top: 10px;
+}
+
+.humanGamePanel {
+  display: none;
+}
+
+.humanGamePanel .humanGuessInput {
+  width: 168px;
+}
+
+.aiGamePanel {
+  display: none;
+  background-color: #BBBBBB;
+  color: #FFFFFF;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: 20px;
+  padding-top: 5px;
+}
