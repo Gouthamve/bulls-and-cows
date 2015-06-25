@@ -5,18 +5,25 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var mongoose = require('mongoose');
 
 var config = require('./oauth.js')
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
+var User = require('./models/user');
+
+mongoose.connect('mongodb://localhost/bcn')
+
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  done(null, user.id);
 });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
 });
 
 // config
@@ -26,7 +33,32 @@ passport.use(new FacebookStrategy({
   callbackURL: config.facebook.callbackURL
 }, function(accessToken, refreshToken, profile, done) {
   process.nextTick(function() {
-    return done(null, profile);
+    User.findOne({
+      'facebook.id': profile.id
+    }, function(err, user) {
+      if (err)
+        return done(err);
+      if (user) {
+        return done(null, user)
+      } else {
+        var newUser = new User();
+        newUser.facebook.id = profile.id;
+        newUser.facebook.token = accessToken;
+        newUser.facebook.displayName = profile.displayName;
+        newUser.facebook.name.familyName = profile.name.familyName;
+        newUser.facebook.name.givenName = profile.name.givenName;
+        newUser.facebook.gender = profile.gender;
+        newUser.facebook.profileUrl = profile.profileUrl;
+        newUser.facebook.email = profile.emails[0].value;
+        newUser.save(function(err) {
+          if (err) {
+            return done(err)
+          } else {
+            return done(null, newUser)
+          }
+        })
+      }
+    })
   });
 }));
 
@@ -66,7 +98,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', routes);
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook', {
+  scope: 'email'
+}));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   failureRedirect: '/',
