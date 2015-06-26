@@ -4,7 +4,7 @@ bulls-and-cows
 A node.js implementation of the game Bulls and Cows
 With a leaderboard
 
-Forked off the excellent: [](https://github.com/vladimirmarinov/bulls-and-cows.git)
+Forked off the excellent: https://github.com/vladimirmarinov/bulls-and-cows.git
 
 INSTALLATION
 =============
