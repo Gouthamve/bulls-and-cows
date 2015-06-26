@@ -1,12 +1,14 @@
 var MainController = {};
 
 MainController.newGame = function() {
-  $.getJSON('/newGame', function() {});
-  if ($('#timer').data('seconds')) {
-    $('#timer').timer('reset')
-  } else {
-    $('#timer').timer();
-  }
+  $.getJSON('/newGame', function() {
+    if ($('#timer').data('seconds')) {
+      $('#timer').timer('reset')
+      $('#timer').timer();
+    } else {
+      $('#timer').timer();
+    }
+  });
 }
 
 MainController.guess = function(guessEvent) {

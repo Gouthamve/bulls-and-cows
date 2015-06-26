@@ -6,16 +6,27 @@ block content
       img(src="/images/bullscows.png")
       br
       if user
-        button(class="humanGameButton", onclick="onHumanGameButtonClick()") Human Game
-        button(class="aiGameButton", onclick="onAIGameButtonClick()") AI Game
+        button(class="humanGameButton", onclick="onHumanGameButtonClick()") Start Game
         br
         div(id="timer")
       else
-        p Login via:
-        a(href="/auth/facebook")
-          button Facebook
-        a(href="/auth/google")
-          button Google
+        p
+          a.btn-auth.btn-facebook(href='/auth/facebook')
+            | Sign in with 
+            b Facebook
+        p
+          a.btn-auth.btn-google(href='/auth/Google')
+            | Sign in with 
+            b Google
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      a(href="/leaderboard")
+        button LeaderBoard
     .gameContainer
       .gamePanel
         .initialPanel

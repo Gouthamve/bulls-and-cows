@@ -5,7 +5,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Game = require('../models/game');
 
-const MAX_NUMBER_OF_GUESSES = 10;
+const MAX_NUMBER_OF_GUESSES = 8;
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -54,15 +54,17 @@ router.get('/guess/:number', function(req, res) {
         console.log(req.session.secretNumber)
         req.session.numberOfTries++;
         if (result.bulls == 4) {
-          Game.findOneAndUpdate({
-            _id: req.session.game
-          }, {
-            turns: req.session.numberOfTries,
-            status: 'won',
-            EndTime: new Date()
-          }, function(err) {
+          Game.findById(req.session.game, function(err, game) {
             if (err)
               console.log(err)
+            else {
+              game.turns = req.session.numberOfTries;
+              game.status = 'won';
+              game.EndTime = new Date()
+              game.time = ((game.EndTime.getTime() - game.StartTime.getTime()) /
+                1000);
+              game.save()
+            }
           })
         }
       }
@@ -92,6 +94,19 @@ router.get('/guess/:number', function(req, res) {
 router.get('/api/user', function(req, res) {
   res.send({
     user: req.user && req.user.id
+  })
+})
+
+router.get('/leaderboard', function(req, res) {
+  Game.find({
+    status: 'won'
+  }).sort({
+    time: 1
+  }).limit(25).populate('user').exec(function(err, games) {
+    console.log(games)
+    res.render('leaderboard', {
+      games: games
+    })
   })
 })
 
