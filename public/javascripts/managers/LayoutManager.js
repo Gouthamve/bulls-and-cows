@@ -1,22 +1,22 @@
 var LayoutManager = {};
 
 LayoutManager.showNoGameView = function() {
-  
+
 }
 
 LayoutManager.showHumanPlayerGameView = function() {
-  
+
 }
 
 LayoutManager.showAIGameView = function() {
-  
+
 }
 
 LayoutManager.addGuess = function(guessInfo) {
   if (typeof guessInfo.cows !== "undefined" &&
-      typeof guessInfo.bulls !== "undefined") {
-    $(".guessesPanel")[0].innerHTML += 
-      "<p>" + guessInfo.guess +  " - Cows: " + guessInfo.cows + 
+    typeof guessInfo.bulls !== "undefined") {
+    $(".guessesPanel")[0].innerHTML +=
+      "<p>" + guessInfo.guess + " - Cows: " + guessInfo.cows +
       " Bulls: " + guessInfo.bulls + "</p>";
   }
 }
@@ -26,7 +26,10 @@ LayoutManager.clearGuessList = function() {
 }
 
 LayoutManager.clearHumanGuessInput = function() {
-  $(".humanGuessInput").val("");
+  $(".humanGuessInput1").val("");
+  $(".humanGuessInput2").val("");
+  $(".humanGuessInput3").val("");
+  $(".humanGuessInput4").val("");
 }
 
 LayoutManager.showInitialPanel = function() {

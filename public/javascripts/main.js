@@ -24,7 +24,8 @@ function onHumanGuessButtonClick() {
   var event = new CustomEvent(
     "guess", {
       detail: {
-        number: $(".humanGuessInput").val()
+        number: $(".humanGuessInput1").val() + $(".humanGuessInput2").val() +
+          $(".humanGuessInput3").val() + $(".humanGuessInput4").val()
       },
       bubbles: true,
       cancelable: true
@@ -32,5 +33,5 @@ function onHumanGuessButtonClick() {
   );
 
   this.dispatchEvent(event);
-  $('.humanGuessInput').val('')
+  LayoutManager.clearHumanGuessInput();
 }
