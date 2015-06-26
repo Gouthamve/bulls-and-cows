@@ -69,7 +69,35 @@ passport.use(new GoogleStrategy({
   },
   function(token, refreshToken, profile, done) {
     process.nextTick(function() {
-      return done(null, profile);
+      User.findOne({
+        'google.id': profile.id
+      }, function(err, user) {
+        if (err) {
+          return done(err)
+        } else if (user) {
+          return done(null, user)
+        } else {
+          var newUser = new User();
+          newUser.google.id = profile.id;
+          newUser.google.token = token;
+          newUser.google.displayName = profile.displayName;
+          newUser.google.name.familyName = profile.name.familyName;
+          newUser.google.name.givenName = profile.name.givenName;
+          newUser.google.email = profile.emails[0].value;
+          newUser.google.gender = profile.gender;
+          newUser.google.domain = profile._json.domain;
+          newUser.google.profileUrl = profile._json.url;
+          newUser.save(function(err) {
+            if (err) {
+              return done(err)
+            } else {
+              return done(null, newUser)
+            }
+          })
+
+        }
+
+      })
     });
   }));
 
