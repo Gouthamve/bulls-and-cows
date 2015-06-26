@@ -51,7 +51,6 @@ router.get('/guess/:number', function(req, res) {
       if (req.session.numberOfTries < MAX_NUMBER_OF_GUESSES) {
         result = gameController.getCowsAndBulls(req.session.secretNumber,
           req.params.number);
-        console.log(req.session.secretNumber)
         req.session.numberOfTries++;
         if (result.bulls == 4) {
           Game.findById(req.session.game, function(err, game) {
@@ -103,7 +102,6 @@ router.get('/leaderboard', function(req, res) {
   }).sort({
     time: 1
   }).limit(25).populate('user').exec(function(err, games) {
-    console.log(games)
     res.render('leaderboard', {
       games: games
     })
