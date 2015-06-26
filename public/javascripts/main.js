@@ -32,4 +32,5 @@ function onHumanGuessButtonClick() {
   );
 
   this.dispatchEvent(event);
+  $('.humanGuessInput').val('')
 }
