@@ -13,13 +13,14 @@ router.get('/', function(req, res) {
 });
 
 router.get('/newGame', function(req, res) {
-  var rand = 0;
-  while (!gameController.isNumberValid(rand)) {
-    rand = Math.floor((Math.random() * 10000));
+  if (req.user) {
+    var rand = 0;
+    while (!gameController.isNumberValid(rand)) {
+      rand = Math.floor((Math.random() * 10000));
+    }
+    req.session.secretNumber = rand;
+    req.session.numberOfTries = 0;
   }
-  req.session.secretNumber = rand;
-  req.session.numberOfTries = 0;
-
   res.json(0);
 });
 
@@ -43,5 +44,11 @@ router.get('/guess/:number', function(req, res) {
   }
   res.json(result);
 });
+
+router.get('/api/user', function(req, res) {
+  res.send({
+    user: req.user && req.user.id
+  })
+})
 
 module.exports = router;
