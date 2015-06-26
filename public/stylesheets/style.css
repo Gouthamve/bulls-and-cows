@@ -22,7 +22,7 @@ a {
   height: 100%;
   display: inline-block;
   vertical-align: top;
-  
+
 }
 
 .gameContainer {
@@ -72,3 +72,12 @@ a {
   height: 20px;
   padding-top: 5px;
 }
+
+#timer {
+      margin-top: 10px;
+			background: #f2f3f4;
+			margin-bottom: 10px;
+			font-weight: bold;
+			font-size: 16px;
+			text-shadow: -1px 0 1px #fff;
+		}
