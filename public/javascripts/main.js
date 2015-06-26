@@ -23,6 +23,7 @@ function onHumanGameButtonClick() {
       LayoutManager.clearHumanGuessInput();
       LayoutManager.showHumanGamePanel();
       player.addGuessEventListener(MainController.guess);
+      document.getElementById("humanGuessInput1").focus()
     }
   })
 }
