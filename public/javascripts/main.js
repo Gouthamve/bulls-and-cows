@@ -5,7 +5,10 @@ $(document).ready(function() {
 var player = null;
 
 function moveToNextField(i) {
-  document.getElementById("humanGuessInput" + i).focus();
+  var value = document.getElementById("humanGuessInput" + i).value
+  if (value != "" && value != " ") {
+    document.getElementById("humanGuessInput" + (i + 1).toString()).focus();
+  }
 }
 
 function onHumanGameButtonClick() {

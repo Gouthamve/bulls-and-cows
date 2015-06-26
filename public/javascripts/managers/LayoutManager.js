@@ -30,7 +30,7 @@ LayoutManager.clearHumanGuessInput = function() {
   $(".humanGuessInput2").val("");
   $(".humanGuessInput3").val("");
   $(".humanGuessInput4").val("");
-  document.getElementById("humanGuessInput1").focus();
+  document.getElementById("humanGuessInput1").focus()
 }
 
 LayoutManager.showInitialPanel = function() {
