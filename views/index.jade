@@ -41,7 +41,7 @@ block content
             | Take your time and try to make most of them.
         .humanGamePanel
           form(onsubmit="return false")
-            input(class="humanGuessInput", type="text")
+            input(class="humanGuessInput", type="text" maxlength=4)
             input(type="submit", value="Make Guess" class="humanGuessButton", onclick="onHumanGuessButtonClick.call(this)")
         .aiGamePanel
           | AI GAME
