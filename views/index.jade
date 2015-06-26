@@ -41,10 +41,10 @@ block content
             | Take your time and try to make most of them.
         .humanGamePanel
           form(onsubmit="return false")
-            input(class="humanGuessInput1", type="text" maxlength=1 style="width: 15px")
-            input(class="humanGuessInput2", type="text" maxlength=1 style="width: 15px")
-            input(class="humanGuessInput3", type="text" maxlength=1 style="width: 15px")
-            input(class="humanGuessInput4", type="text" maxlength=1 style="width: 15px")
+            input(class="humanGuessInput1", id="humanGuessInput1" type="text" maxlength=1 style="width: 15px" onkeyup="moveToNextField(2)")
+            input(class="humanGuessInput2", id="humanGuessInput2" type="text" maxlength=1 style="width: 15px" onkeyup="moveToNextField(3)")
+            input(class="humanGuessInput3", id="humanGuessInput3" type="text" maxlength=1 style="width: 15px" onkeyup="moveToNextField(4)")
+            input(class="humanGuessInput4", id="humanGuessInput4" type="text" maxlength=1 style="width: 15px" )
             input(type="submit", value="Make Guess" class="humanGuessButton", onclick="onHumanGuessButtonClick.call(this)")
         .aiGamePanel
           | AI GAME

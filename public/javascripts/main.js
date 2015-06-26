@@ -4,6 +4,10 @@ $(document).ready(function() {
 
 var player = null;
 
+function moveToNextField(i) {
+  document.getElementById("humanGuessInput" + i).focus();
+}
+
 function onHumanGameButtonClick() {
   $.getJSON('/api/user', function(data) {
     if (data.user) {
