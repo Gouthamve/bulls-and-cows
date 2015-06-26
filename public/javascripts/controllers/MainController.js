@@ -1,21 +1,21 @@
-var MainController = { };
+var MainController = {};
 
-MainController.newGame = function () {
-  $.getJSON( '/newGame', function() { });
+MainController.newGame = function() {
+  $.getJSON('/newGame', function() {});
 }
 
 MainController.guess = function(guessEvent) {
   var _guessCallback = guessEvent.guessCallback;
-  $.getJSON( '/guess/' + guessEvent.detail.number, function( data ) {
-  	 LayoutManager.addGuess(data);
-  	 var gameOver = MainController.processGuessResult(data);
+  $.getJSON('/guess/' + guessEvent.detail.number, function(data) {
+    LayoutManager.addGuess(data);
+    var gameOver = MainController.processGuessResult(data);
     if (!gameOver) {
       _guessCallback(data);
     }
   });
 }
 
-MainController.processGuessResult = function (guessResponse) {
+MainController.processGuessResult = function(guessResponse) {
   if (guessResponse.bulls == 4) {
     alert("Well done!");
     return true;
@@ -25,6 +25,6 @@ MainController.processGuessResult = function (guessResponse) {
       return true;
     }
   }
-  
+
   return false;
 }
