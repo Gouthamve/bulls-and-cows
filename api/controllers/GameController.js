@@ -1,7 +1,7 @@
 (function ($) {
 
   $.isNumberValid = function (number) {
-    return !this.hasRepeatingDigits(number) && number > 999 && number < 10000;
+    return !this.hasRepeatingDigits(number);
   }
   
   $.hasRepeatingDigits = function(number) {
