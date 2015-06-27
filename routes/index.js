@@ -18,9 +18,9 @@ router.get('/', function(req, res) {
 router.get('/newGame', function(req, res) {
   if (req.user) {
     var rand = 0;
-    while (!gameController.isNumberValid(rand)) {
-      rand = Math.floor((Math.random() * 10000));
-    }
+    do {
+      rand = 1000+Math.floor(Math.random() * (10000-1000));
+    } while (!gameController.isNumberValid(rand));
     req.session.secretNumber = rand;
     req.session.numberOfTries = 0;
     newGame = new Game({
