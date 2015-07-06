@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  table(class="zui-table zui-table-zebra" style="margin: auto; width: 60%")
+    thead
+      tr
+        th
+          p Rank
+        th
+          p(style="text-align:center") Name
+        th
+          p Time (sec)
+    tbody
+        each user, index in users
+          tr
+            td #{index+1}
+            if user.facebook.displayName
+              td #{game.user.facebook.displayName}
+            else
+              td #{user.google.displayName}
+            td 
+              b #{user.bestTime}

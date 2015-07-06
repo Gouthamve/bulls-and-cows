@@ -4,6 +4,7 @@ var router = express.Router();
 
 var mongoose = require('mongoose');
 var Game = require('../models/game');
+var User = require('../models/user');
 
 const MAX_NUMBER_OF_GUESSES = 8;
 
@@ -104,6 +105,20 @@ router.get('/leaderboard', function(req, res) {
   }).limit(25).populate('user').exec(function(err, games) {
     res.render('leaderboard', {
       games: games
+    })
+  })
+})
+
+router.get('/leaderboard2', function(req, res) {
+  User.find({
+    bestTime: {
+      $gt: 0
+    }
+  }).sort({
+    bestTime: 1
+  }).limit(25).exec(function(err, users) {
+    res.render('leaderboard2', {
+      users: users
     })
   })
 })
