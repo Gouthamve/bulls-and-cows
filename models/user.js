@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 
 var userSchema = mongoose.Schema({
+	bestTime: Number,
 	facebook: {
 		id: String,
 		displayName: String,

@@ -20,7 +20,7 @@ router.get('/newGame', function(req, res) {
   if (req.user) {
     var rand = 0;
     do {
-      rand = 1000+Math.floor(Math.random() * (10000-1000));
+      rand = 1000 + Math.floor(Math.random() * (10000 - 1000));
     } while (!gameController.isNumberValid(rand));
     req.session.secretNumber = rand;
     req.session.numberOfTries = 0;
@@ -64,6 +64,18 @@ router.get('/guess/:number', function(req, res) {
               game.time = ((game.EndTime.getTime() - game.StartTime.getTime()) /
                 1000);
               game.save()
+              User.findOne({
+                _id: req.user._id
+              }).exec(function(err, user) {
+                if (user && !user.bestTime) {
+                  user.bestTime = game.time
+                  user.save()
+                }
+                if (user && user.bestTime > game.time) {
+                  user.bestTime = game.time;
+                  user.save()
+                }
+              })
             }
           })
         }
@@ -97,19 +109,19 @@ router.get('/api/user', function(req, res) {
   })
 })
 
-router.get('/leaderboard', function(req, res) {
-  Game.find({
-    status: 'won'
-  }).sort({
-    time: 1
-  }).limit(25).populate('user').exec(function(err, games) {
-    res.render('leaderboard', {
-      games: games
-    })
-  })
-})
+// router.get('/leaderboard', function(req, res) {
+//   Game.find({
+//     status: 'won'
+//   }).sort({
+//     time: 1
+//   }).limit(25).populate('user').exec(function(err, games) {
+//     res.render('leaderboard', {
+//       games: games
+//     })
+//   })
+// })
 
-router.get('/leaderboard2', function(req, res) {
+router.get('/leaderboard', function(req, res) {
   User.find({
     bestTime: {
       $gt: 0
